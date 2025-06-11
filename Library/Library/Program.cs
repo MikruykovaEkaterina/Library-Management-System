@@ -12,6 +12,7 @@ namespace Library
 static void Main(string[] args)
         {
             Library library = new Library();
+            
             while (true)
             {
                 Console.WriteLine( "\n" + "Меню библиотеки:" + "\n" +
@@ -37,20 +38,20 @@ static void Main(string[] args)
                             int year = int.Parse(Console.ReadLine());
                             Console.Write( "\n" + "Жанр - ");
                             string genre = Console.ReadLine();
-                            library.AddBook(new Book(_ID, title, author, year, genre)); // Добавление книги
+                            library.AddBook(title, author, year, genre); // Добавление книги
                             break;
                         case 2:
                             Console.Clear();
                             Console.Write("Удаление книги, введите информацию:"+ "\n" +
-                                          "Название книги - ");
-                            string removename = Console.ReadLine();
-                            library.RemoveBook(removename); // Удаление книги из библиотеки
+                                          "ID книги - ");
+                            int id = int.Parse(Console.ReadLine());
+                            library.RemoveBook(id); // Удаление книги из библиотеки
                             break;
                         case 3:
                             Console.Clear();
                             Console.Write("Редактирование данных книги, введите информацию:"+ "\n" +
                                   "ID книги - ");
-                            int idbook = Console.ReadLine();
+                            int idbook = int.Parse(Console.ReadLine());
                             Console.Write( "\n" + "Новое название - ");
                             string titlenew = Console.ReadLine();
                             Console.Write( "\n" + "Новый автор - ");
@@ -70,7 +71,6 @@ static void Main(string[] args)
                             break;
                     }
                 }
-                
                 catch
                 {
                     Console.WriteLine("Введено неверное значение.");

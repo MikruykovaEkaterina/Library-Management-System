@@ -8,7 +8,7 @@ namespace Library
 {
   internal class Book
   {
-    static private int _ID = 1;
+    //static private int _ID = 1; // Перенес в библиотеку Library
     private string title; //название
     public string Title
     {
@@ -54,6 +54,22 @@ namespace Library
     }
     public bool IsAvailable { get; set; } //статус
     public int ID { get; private set; } //id книги
+    
+    //Хранение информации в виде строки
+    public Book(int id, string title, string author, int year, string genre)
+    {
+      ID = id;
+      Title = title;
+      Author = author;
+      Year = year;
+      Genre = genre;
+      IsAvailable = true;
+    }
+
+    public override string ToString()
+    {
+      return $"ID: {ID}, название: '{Title}', автор: '{Author}', год издания: {Year}, жанр: '{Genre}' - статус: {(IsAvailable ? "доступна" : "взята")}";
+    }
   }
   //комментарий для конструктора,
   //при создании нового экземпляра в ID класть _ID,

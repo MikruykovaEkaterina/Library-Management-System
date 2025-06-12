@@ -32,15 +32,22 @@ namespace Library
     // Удаление книги из библиотеки (поиск по ID)
     public void RemoveBook(int id)
     {
-      if (Books.ContainsKey(id))
-      {
-        Books.Remove(id);
-        Console.WriteLine($"Книга с ID ({id}) удалена");
-      }
-      else
-      {
-        Console.WriteLine($"Книга с ID ({id}) не найдена");
-      }
+            if (Books.ContainsKey(id))
+            {
+                if (Books[id].IsAvailable == true)
+                {
+                    Books.Remove(id);
+                    Console.WriteLine($"Книга с ID ({id}) удалена");
+                }
+                else
+                {
+                    Console.WriteLine($"Книга с ID ({id}) занята. Удаление отменено");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Книга с ID ({id}) не найдена");
+            }
     }
 
     // Редактирование книги (поиск по ID)

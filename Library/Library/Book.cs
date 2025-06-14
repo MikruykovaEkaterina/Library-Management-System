@@ -31,8 +31,8 @@ namespace Library
       }
     }
 
-    private string year; //год
-    public string Year
+    private int year; //год
+    public int Year
     {
       get { return year; }
       set

@@ -23,10 +23,9 @@ namespace Library
     // Добавление книги в библиотеку с новым ID
     public void AddBook(string title, string author, int year, string genre)
     {
-      Book booknew = new Book(_ID, title, author, year, genre);
-      Books[_ID] = booknew;
-      Console.WriteLine($"Книга: {title} (ID:{_ID})");
-      _ID++;
+      Book booknew = new Book(title, author, year, genre);
+      Books[booknew.ID] = booknew;
+      Console.WriteLine($"Добавлена книга: {title}");
     }
 
     // Удаление книги из библиотеки (поиск по ID)

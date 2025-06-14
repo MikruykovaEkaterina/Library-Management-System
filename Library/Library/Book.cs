@@ -8,7 +8,7 @@ namespace Library
 {
   internal class Book
   {
-    //static private int _ID = 1; // Перенес в библиотеку Library
+    static private int _ID = 1;
     private string title; //название
     public string Title
     {

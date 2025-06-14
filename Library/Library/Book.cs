@@ -56,9 +56,10 @@ namespace Library
     public int ID { get; private set; } //id книги
     
     //Хранение информации в виде строки
-    public Book(int id, string title, string author, int year, string genre)
+    public Book(string title, string author, int year, string genre)
     {
-      ID = id;
+      this.ID = ID;
+		_ID++;
       Title = title;
       Author = author;
       Year = year;
@@ -68,9 +69,10 @@ namespace Library
 
     public override string ToString()
     {
-      return $"ID: {ID}, название: '{Title}', автор: '{Author}', год издания: {Year}, жанр: '{Genre}' - статус: {(IsAvailable ? "доступна" : "взята")}";
+      return $"название: '{Title}', автор: '{Author}', год издания: {Year}, жанр: '{Genre}' - статус: {(IsAvailable ? "доступна" : "взята")}";
     }
   }
+
   //комментарий для конструктора,
   //при создании нового экземпляра в ID класть _ID,
   //_ID после этого увеличить

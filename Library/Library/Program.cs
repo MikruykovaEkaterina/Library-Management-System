@@ -8,11 +8,9 @@ namespace Library
 {
   class Program
   {
-    Library library = Library.getInstance(); //экземпляр библиотеки
+    static Library library = Library.getInstance(); //экземпляр библиотеки
 static void Main(string[] args)
         {
-            Library library = new Library();
-            
             while (true)
             {
                 Console.WriteLine( "\n" + "Меню библиотеки:" + "\n" +

@@ -46,18 +46,22 @@ using System;
                             break;
                         case 3:
                             Console.Clear();
-                            Console.Write("Редактирование данных книги, введите информацию:"+ "\n" +
-                                  "ID книги - ");
+							Console.Write("Редактирование данных книги, введите информацию:" + "\n" +
+                                          "ID книги - ");
                             int idbook = int.Parse(Console.ReadLine());
-                            Console.Write( "\n" + "Новое название - ");
-                            string titlenew = Console.ReadLine();
-                            Console.Write( "\n" + "Новый автор - ");
-                            string authornew= Console.ReadLine();
-                            Console.Write( "\n" + "Новый год издания - ");
-                            int yearnew = int.Parse(Console.ReadLine());
-                            Console.Write( "\n" + "Новый жанр - ");
-                            string genrenew = Console.ReadLine();
-                            library.EditBook(idbook, titlenew, authornew, yearnew, genrenew); // Редактирование книги
+                            if (Library.Books.ContainsKey(idbook))
+                            {
+                                Console.Write("\n" +
+                                              "Введите параметр, который надо изменить (название, автор, год, жанр) - ");
+                                string atribute = Console.ReadLine();
+                                Console.Write("\n" + "Новое значение - ");
+                                string newvalue = Console.ReadLine();
+                                library.EditBook(idbook, atribute, newvalue);
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Книга с ID ({idbook}) не найдена");
+                            }
                             break;
                         case 4:
                             return;

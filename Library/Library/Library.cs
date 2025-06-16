@@ -49,22 +49,88 @@ namespace Library
             }
     }
 
-    // Редактирование книги (поиск по ID)
-    public void EditBook(int id, string titlenew, string authornew, int yearnew, string genrenew)
+    // Редактирование книги (отдельные колонки по запросу attribute)
+        public void EditBook(int id, string attribute, string newValue)
+        {
+            if (Books.ContainsKey(id))
+            {
+                Book book = Books[id];
+                IEditStrategy editStrategy = attribute switch
+                {
+                    "название" => new TitleEditStrategy(),
+                    "автор" => new AuthorEditStrategy(),
+                    "год" => new YearEditStrategy(),
+                    "жанр" => new GenreEditStrategy(),
+                    _ => throw new ArgumentException("Неверно введен параметр")
+                };
+                editStrategy.Edit(book, newValue);
+            }
+            else
+            {
+                Console.WriteLine($"Книга с ID ({id}) не найдена");
+            }
+        }
+        // Вывод всех книг
+        public void DisplayBooks()
+        {
+            Console.WriteLine("Книг в библиотэке вооот столько:");
+            foreach (var book in Books)
+            {
+                Console.WriteLine($"ID: {book.Key}, {book.Value}");
+            }
+        }
+    }
+    // Интерфейс стратегии редактирования книги
+    public interface IEditStrategy
     {
-      if (Books.ContainsKey(id))
-      {
-        Book book = Books[id];
-        book.Title = titlenew;
-        book.Author = authornew;
-        book.Year = yearnew;
-        book.Genre = genrenew;
-        Console.WriteLine($"Информация о книге {titlenew} (ID:{id}) изменена");
-      }
-      else
-      {
-        Console.WriteLine($"Книга с ID ({id}) не найдена");
-      }
+        void Edit(Book book, string newValue);
+    }
+
+    // Стратегия редактирования названия книги
+    public class TitleEditStrategy : IEditStrategy
+    {
+        public void Edit(Book book, string newValue)
+        {
+            book.Title = newValue;
+            Console.WriteLine($"Название изменено: {book}");
+        }
+    }
+
+    // Стратегия редактирования автора книги
+    public class AuthorEditStrategy : IEditStrategy
+    {
+        public void Edit(Book book, string newValue)
+        {
+            book.Author = newValue;
+            Console.WriteLine($"Автор изменен: {book}");
+        }
+    }
+
+    // Стратегия редактирования года издания книги
+    public class YearEditStrategy : IEditStrategy
+    {
+        public void Edit(Book book, string newValue)
+        {
+            if (int.TryParse(newValue, out int newYear))
+            {
+                book.Year = newYear;
+                Console.WriteLine($"Год издания изменен: {book}");
+            }
+            else
+            {
+                Console.WriteLine("Неверное значение");
+            }
+        }
+    }
+
+    // Стратегия редактирования жанра книги
+    public class GenreEditStrategy : IEditStrategy
+    {
+        public void Edit(Book book, string newValue)
+        {
+            book.Genre = newValue;
+            Console.WriteLine($"Жанр изменен: {book}");
+        }
     }
   }
 }

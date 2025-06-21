@@ -24,10 +24,11 @@ namespace Library
                            "8. Вывести список свободных и занятых книг\n" +
                            "9. Выйти из библиотеки");
 
-        int menyitem = int.Parse(Console.ReadLine());
+
         int bookId, readerId;
         try
         {
+          int menyitem = int.Parse(Console.ReadLine());
           switch (menyitem)
           {
             case 1:
@@ -38,11 +39,17 @@ namespace Library
               Console.Write("\n" + "Автор - ");
               string author = Console.ReadLine();
               Console.Write("\n" + "Год издания - ");
-              int year = int.Parse(Console.ReadLine());
+              int year;
+              if (!int.TryParse(Console.ReadLine(), out year))
+              {
+                Console.WriteLine("Некорректный год, введите число\nКнига не создалась");
+                break;
+              }
               Console.Write("\n" + "Жанр - ");
               string genre = Console.ReadLine();
               library.AddBook(title, author, year, genre); // Добавление книги
               break;
+            
             case 2:
               Console.Clear();
               Console.Write("Удаление книги, введите информацию:" + "\n" +
@@ -114,8 +121,8 @@ namespace Library
         }
         catch
         {
+          
           Console.WriteLine("Введено неверное значение.");
-          Console.ReadLine();
         }
       }
     }
